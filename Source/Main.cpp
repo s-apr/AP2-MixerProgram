@@ -46,9 +46,14 @@ int main (int argc, char* argv[])
     buffer2.applyGain(0.5f);
 
     //buffer for longest input
+        //output buffer for combined samples
     int outputSamples = std::max(numSamples1, numSamples2);
-    //output buffer for combined samples
     AudioBuffer<float> outputBuffer(1, outputSamples);
+
+    //read buffers
+    const float* readPtr1 = buffer1.getReadPointer(0);
+    const float* readPtr2 = buffer2.getReadPointer(0);
+    float* writePtr = outputBuffer.getWritePointer(0);
 
     // Write file
     juce::File output("E:\\JUCE\\JUCE Projects\\ToneMix.wav");
