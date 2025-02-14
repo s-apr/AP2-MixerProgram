@@ -19,7 +19,7 @@ int main (int argc, char* argv[])
     manager.registerBasicFormats();
 
     // Read file
-    juce::File inputFile("path/to/wav/file");
+    juce::File inputFile("E:\\JUCE\\JUCE Projects\\Tone.wav");
     FileInputStream* inputStream = new FileInputStream(inputFile);
     AudioFormatReader* reader = format.createReaderFor(inputStream, true);
     int numSamples = static_cast<int>(reader->lengthInSamples);
@@ -28,8 +28,11 @@ int main (int argc, char* argv[])
     std::cout << "done reading" << std::endl;
     delete reader;
 
+    //apply gain
+    buffer.applyGain(0.5f);
+
     // Write file
-    juce::File output("path/to/wav/file");
+    juce::File output("E:\\JUCE\\JUCE Projects\\Tone_Copy.wav");
     FileOutputStream* outputStream = new FileOutputStream(output);
     outputStream->setPosition(0); // in case it exists
     outputStream->truncate();
